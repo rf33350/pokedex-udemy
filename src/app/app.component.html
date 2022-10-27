@@ -1,0 +1,44 @@
+<h1 class="center">{{title}}</h1>
+
+<div class="container">
+    <div class="row ">
+        <div class="col s12 m6 l4" *ngFor="let pokemon of pokemonList">
+            <div class="card horizontal" pkmnBorderCard>
+                <div class="card-image">
+                    <img src="{{ pokemon.picture }}" alt="image du pokemon {{ pokemon.name }}"> 
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>{{ pokemon.name }}</p>
+                        <p><small> {{ pokemon.created | date:'dd/MM/YY' }}</small></p>
+                        <span 
+                            *ngFor="let type of pokemon.types" 
+                            class="{{type | pokemonTypeColor}}">
+                            {{ type }}
+                        </span>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <input 
+        class="input-field col s12 m6 l3"
+        #input
+        (keyup.enter)="selectPokemon(input.value)"
+        type="number"
+        min="0" 
+        max="11"
+        placeholder="Enter number..."
+        inputmode="numeric"
+        style="-moz-appearance: textfield"
+    />
+
+    <p *ngIf="pokemonSelected">
+        Vous avez sélectionné le pokemon: {{ pokemonSelected.name }}
+    </p>
+    <p *ngIf="!pokemonSelected">
+        Aucun pokemon n'a été trouvé.
+    </p>
+  
